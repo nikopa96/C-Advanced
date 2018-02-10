@@ -18,11 +18,12 @@
 
 class Circle {
 public:
-    Circle(Point c, float radius);
+    Circle(Point c, float newRadius);
     Point getCenter();
     float getRadius();
-    void setRadius(float radius);
-    int area();
+    void setRadius(float newRadius);
+
+    float area();
     float circumference();
     bool hasPoint(const Point& p);
 private:

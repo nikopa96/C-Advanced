@@ -18,6 +18,8 @@ public:
     const double x, y;
     bool isOrigin();
     float distanceTo(const Point& other);
+    double getX()const;
+    double getY()const;
 };
 
 #endif //PRAX02_POINT_HPP

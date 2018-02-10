@@ -19,8 +19,8 @@
 class Vector {
 public:
     Vector(float dX, float dY);
-    int getX();
-    int getY();
+    float getX()const;
+    float getY()const;
     float length();
     void negate();
     void scalarProduct(int a);

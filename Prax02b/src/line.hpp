@@ -21,7 +21,7 @@ public:
     Line(Point pa, Point pb);
     bool hasPoint(const Point& p);
     Point intersect(const Line& other);
-    const double a, b;
+    double a, b;
 };
 
 #endif //PRAX02_LINE_HPP
