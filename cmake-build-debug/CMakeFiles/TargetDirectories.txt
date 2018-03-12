@@ -1,0 +1,3 @@
+C:/Users/nikolay/CLionProjects/idk1531-2018/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/nikolay/CLionProjects/idk1531-2018/cmake-build-debug/CMakeFiles/idk1531-2018.dir
+C:/Users/nikolay/CLionProjects/idk1531-2018/cmake-build-debug/CMakeFiles/edit_cache.dir
