@@ -23,7 +23,7 @@ int main() {
 
     unsigned u1 = 42, u2 = 10;
     cout << u1 - u2 << endl;
-    cout << "Test: " << u2 - u1 << endl;
+    cout << u2 - u1 << endl;
 
     // Type Aliases
     // C++98 C-like syntax
@@ -50,8 +50,6 @@ int main() {
     int q = 5;
     decltype(q) w = 10;  // variable w is of whatever type q is
     //decltype(f()) t;   // variable t of type equal to the type returned by f()
-    cout << "Test2: " << q << endl;
-    cout << "Test3: " << w << endl;
 
     // C++98 const
     const int o = 5;
