@@ -26,8 +26,8 @@
       <file leaf-file-name="Player.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Player.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="204" column="29" lean-forward="true" selection-start-line="204" selection-start-column="29" selection-end-line="204" selection-end-column="29" />
+            <state relative-caret-position="493">
+              <caret line="204" column="8" lean-forward="true" selection-start-line="204" selection-start-column="8" selection-end-line="204" selection-end-column="8" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -38,8 +38,8 @@
       <file leaf-file-name="Player.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Player.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="29" column="31" lean-forward="true" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
+            <state relative-caret-position="323">
+              <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
               <folding>
                 <element signature="e#49#66#0" expanded="true" />
               </folding>
@@ -50,7 +50,7 @@
       <file leaf-file-name="Tile.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tile.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
+            <state relative-caret-position="24">
               <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
               <folding>
                 <element signature="e#45#62#0" expanded="true" />
@@ -74,8 +74,8 @@
       <file leaf-file-name="Card.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Card.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="658">
-              <caret line="75" column="2" selection-start-line="75" selection-start-column="2" selection-end-line="75" selection-end-column="2" />
+            <state relative-caret-position="432">
+              <caret line="87" selection-start-line="87" selection-end-line="87" />
               <folding>
                 <element signature="e#45#62#0" expanded="true" />
               </folding>
@@ -86,8 +86,8 @@
       <file leaf-file-name="Card.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Card.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1054">
-              <caret line="62" selection-start-line="62" selection-end-line="62" />
+            <state relative-caret-position="493">
+              <caret line="89" column="27" selection-start-line="89" selection-start-column="27" selection-end-line="89" selection-end-column="27" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -114,6 +114,7 @@
       <find>decre</find>
       <find>Disp</find>
       <find>setCard</find>
+      <find>ran</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -122,12 +123,12 @@
         <option value="$PROJECT_DIR$/Board.h" />
         <option value="$PROJECT_DIR$/Board.cpp" />
         <option value="$PROJECT_DIR$/Tile.cpp" />
-        <option value="$PROJECT_DIR$/Card.cpp" />
         <option value="$PROJECT_DIR$/main.cpp" />
+        <option value="$PROJECT_DIR$/Tile.h" />
+        <option value="$PROJECT_DIR$/Player.h" />
+        <option value="$PROJECT_DIR$/Card.cpp" />
         <option value="$PROJECT_DIR$/Card.h" />
         <option value="$PROJECT_DIR$/Player.cpp" />
-        <option value="$PROJECT_DIR$/Player.h" />
-        <option value="$PROJECT_DIR$/Tile.h" />
       </list>
     </option>
   </component>
@@ -203,12 +204,12 @@
       <updated>1525936804903</updated>
       <workItem from="1525936806303" duration="17094000" />
       <workItem from="1525956565826" duration="6596000" />
-      <workItem from="1525966110046" duration="18213000" />
+      <workItem from="1525966110046" duration="19129000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41903000" />
+    <option name="totallyTimeSpent" value="42819000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -220,7 +221,7 @@
       <window_info anchor="bottom" id="CMake" order="11" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.26399156" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26399156" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -233,6 +234,26 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
     </layout>
+    <layout-to-restore>
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26399156" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16614583" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39915523" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.3284055" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="CMake" order="11" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -381,16 +402,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Card.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="62" selection-start-line="62" selection-end-line="62" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tile.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -408,16 +419,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Card.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="658">
-          <caret line="75" column="2" selection-start-line="75" selection-start-column="2" selection-end-line="75" selection-end-column="2" />
-          <folding>
-            <element signature="e#45#62#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="556">
@@ -428,10 +429,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Card.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="89" column="27" selection-start-line="89" selection-start-column="27" selection-end-line="89" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Tile.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
+        <state relative-caret-position="24">
           <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+          <folding>
+            <element signature="e#45#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Card.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="87" selection-start-line="87" selection-end-line="87" />
           <folding>
             <element signature="e#45#62#0" expanded="true" />
           </folding>
@@ -440,8 +461,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Player.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="29" column="31" lean-forward="true" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
+        <state relative-caret-position="323">
+          <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
           <folding>
             <element signature="e#49#66#0" expanded="true" />
           </folding>
@@ -450,8 +471,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Player.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="204" column="29" lean-forward="true" selection-start-line="204" selection-start-column="29" selection-end-line="204" selection-end-column="29" />
+        <state relative-caret-position="493">
+          <caret line="204" column="8" lean-forward="true" selection-start-line="204" selection-start-column="8" selection-end-line="204" selection-end-column="8" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

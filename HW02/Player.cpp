@@ -200,6 +200,12 @@ void Player::modifierCardsManager() {
     }
 }
 
+void Player::randomDrop() {
+    if (!cardStorageForPlayer.empty()) {
+        cardStorageForPlayer.erase(cardStorageForPlayer.begin());
+    }
+}
+
 FlyingPlayer::FlyingPlayer(const std::string &playerName, std::shared_ptr<Tile> &&tile) : Player(playerName, std::move(tile)) {}
 
 void FlyingPlayer::pickUp() {

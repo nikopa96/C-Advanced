@@ -63,6 +63,33 @@ void ZippyCard::onDroped(Player &player) {
 
 }
 
+void HypnoticCard::onPickedUp(Player &player) {
+    if (isPicked) {
+        player.vitality = 0;
+    }
+}
+
+void HypnoticCard::onDroped(Player &player) {
+
+}
+
+void StickyCard::onPickedUp(Player &player) {
+
+}
+
+void StickyCard::onDroped(Player &player) {
+    setCardPickedState();
+}
+
+void DistractCard::onPickedUp(Player &player) {
+
+}
+
+void DistractCard::onDroped(Player &player) {
+    if (isPicked) {
+        player.randomDrop();
+    }
+}
 
 std::string StickyCard::getCardType() const {
     return "StickyCard";

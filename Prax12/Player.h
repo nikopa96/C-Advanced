@@ -10,6 +10,8 @@ class Player {
     friend class VitalityCard;
     friend class RestlessExplorerCard;
     friend class ZippyCard;
+    friend class HypnoticCard;
+    friend class DistractCard;
 public:
     Player(const std::string &playerName, std::shared_ptr<Tile> &&tile);
     friend std::ostream &operator<< (std::ostream &os, const Player &player);
@@ -21,6 +23,7 @@ public:
 
     void pickUp();
     void drop(std::shared_ptr<Card> card);
+    void randomDrop();
     void sleep();
 
     size_t getVitality();

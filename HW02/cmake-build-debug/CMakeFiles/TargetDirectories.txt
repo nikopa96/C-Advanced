@@ -1,3 +1,0 @@
-/cygdrive/d/idk1531-2018/Prax12/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/cygdrive/d/idk1531-2018/Prax12/cmake-build-debug/CMakeFiles/edit_cache.dir
-/cygdrive/d/idk1531-2018/Prax12/cmake-build-debug/CMakeFiles/Prax12.dir

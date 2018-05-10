@@ -44,6 +44,8 @@ public:
 class StickyCard : public ModifierCard {
 public:
     std::string getCardType() const override;
+    void onPickedUp(Player &player) override;
+    void onDroped(Player &player) override;
 };
 
 class DispelCard : public ModifierCard {
@@ -61,6 +63,8 @@ public:
 class DistractCard : public ActionCard {
 public:
     std::string getCardType() const override;
+    void onPickedUp(Player &player) override;
+    void onDroped(Player &player) override;
 };
 
 class RewindCard : public ActionCard {
@@ -78,6 +82,9 @@ public:
 class HypnoticCard : public ActionCard {
 public:
     std::string getCardType() const override;
+    void onPickedUp(Player &player) override;
+    void onDroped(Player &player) override;
 };
+
 
 #endif //PRAX12_CARD_H
