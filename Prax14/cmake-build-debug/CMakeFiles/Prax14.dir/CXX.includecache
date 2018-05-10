@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/d/idk1531-2018/Prax14/ThreadPool.cpp
+ThreadPool.h
+/cygdrive/d/idk1531-2018/Prax14/ThreadPool.h
+
+/cygdrive/d/idk1531-2018/Prax14/ThreadPool.h
+cstddef
+-
+thread
+-
+vector
+-
+deque
+-
+mutex
+-
+
+/cygdrive/d/idk1531-2018/Prax14/main.cpp
+iostream
+-
+future
+-
+ThreadPool.h
+/cygdrive/d/idk1531-2018/Prax14/ThreadPool.h
+

@@ -1,0 +1,1 @@
+/usr/bin/c++.exe -g  -Wl,--enable-auto-import CMakeFiles/HW02a.dir/main.cpp.o CMakeFiles/HW02a.dir/Board.cpp.o CMakeFiles/HW02a.dir/Card.cpp.o CMakeFiles/HW02a.dir/Player.cpp.o CMakeFiles/HW02a.dir/Tile.cpp.o  -o HW02a.exe -Wl,--out-implib,libHW02a.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
