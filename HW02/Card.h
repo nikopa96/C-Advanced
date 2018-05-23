@@ -13,17 +13,16 @@ public:
     virtual void onDroped(Player &player);
     void setCardPickedState();
     void setCardDropedState();
+    void doAction(Player &player);
 protected:
     bool isPicked;
     bool isDroped;
 };
 
 class ModifierCard : public Card {
-
 };
 
 class ActionCard : public Card {
-
 };
 
 class PrizeCard : public ModifierCard {
@@ -51,6 +50,9 @@ public:
 class DispelCard : public ModifierCard {
 public:
     std::string getCardType() const override;
+    void onPickedUp(Player &player) override;
+    void onDroped(Player &player) override;
+    void activateForPlayer(Player &player);
 };
 
 class RestlessExplorerCard : public ModifierCard {
@@ -58,6 +60,8 @@ public:
     std::string getCardType() const override;
     void onPickedUp(Player &player) override;
     void onDroped(Player &player) override;
+private:
+    size_t savedPlayerVitality;
 };
 
 class DistractCard : public ActionCard {
@@ -70,6 +74,8 @@ public:
 class RewindCard : public ActionCard {
 public:
     std::string getCardType() const override;
+    void onPickedUp(Player &player) override;
+    void onDroped(Player &player) override;
 };
 
 class ZippyCard : public ActionCard {

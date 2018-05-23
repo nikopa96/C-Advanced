@@ -1,4 +1,7 @@
 #include <iostream>
+#include <sstream>
+#include <random>
+#include <algorithm>
 #include "Card.h"
 #include "Player.h"
 
@@ -12,61 +15,65 @@ void Card::onDroped(Player &player) {
 
 void Card::setCardPickedState() {
     this->isPicked = true;
-    this->isDroped = false;
 }
 
 void Card::setCardDropedState() {
     this->isPicked = false;
-    this->isDroped = false;
 }
 
-void VitalityCard::onPickedUp(Player &player) {
+void Card::doAction(Player &player) {
     if (isPicked) {
-        player.increaseVitality();
-        player.increaseMaxVitality();
+        onPickedUp(player);
+    } else {
+        onDroped(player);
     }
 }
 
+void VitalityCard::onPickedUp(Player &player) {
+    player.vitality++;
+    player.maxVitality++;
+}
+
 void VitalityCard::onDroped(Player &player) {
-    if (isDroped) {
-        player.maxVitality--;
+    player.maxVitality = 3;
+
+    if (player.vitality > player.maxVitality) {
+        player.vitality = player.maxVitality;
     }
 }
 
 void PrizeCard::onPickedUp(Player &player) {
-    if (isPicked) {
-        player.point++;
-    }
+    player.point++;
 }
 
 void PrizeCard::onDroped(Player &player) {
-
 }
 
 void RestlessExplorerCard::onPickedUp(Player &player) {
-    if (isPicked) {
-        player.vitality++;
+    if (savedPlayerVitality) {
+        player.vitality = savedPlayerVitality;
+    } else {
+        savedPlayerVitality = player.vitality;
+        savedPlayerVitality++;
     }
 }
 
 void RestlessExplorerCard::onDroped(Player &player) {
-
 }
 
 void ZippyCard::onPickedUp(Player &player) {
-    if (isPicked) {
-        player.vitality++;
-    }
+    player.vitality++;
+
+    player.cardStorageForPlayer.pop_back();
 }
 
 void ZippyCard::onDroped(Player &player) {
-
 }
 
 void HypnoticCard::onPickedUp(Player &player) {
-    if (isPicked) {
-        player.vitality = 0;
-    }
+    player.vitality = 0;
+
+    player.cardStorageForPlayer.pop_back();
 }
 
 void HypnoticCard::onDroped(Player &player) {
@@ -74,25 +81,65 @@ void HypnoticCard::onDroped(Player &player) {
 }
 
 void StickyCard::onPickedUp(Player &player) {
-
 }
 
 void StickyCard::onDroped(Player &player) {
-    setCardPickedState();
 }
 
 void DistractCard::onPickedUp(Player &player) {
+    player.cardStorageForPlayer.pop_back();
 
+    std::mt19937 rng;
+    rng.seed(std::random_device()());
+    std::uniform_int_distribution<std::mt19937::result_type> randomNumber(0, player.cardStorageForPlayer.size() - 1);
+
+    size_t randomNumberOfElement = randomNumber(rng);
+    std::shared_ptr<Card> removedCard = player.cardStorageForPlayer[randomNumberOfElement];
+
+    std::cout << removedCard.get()->getCardType() << " (" << removedCard.get() << ")" << " has been removed" << std::endl;
+
+    player.cardStorageForPlayer.erase(player.cardStorageForPlayer.begin() + randomNumberOfElement);
 }
 
 void DistractCard::onDroped(Player &player) {
-    if (isPicked) {
-        player.randomDrop();
+}
+
+void DispelCard::onPickedUp(Player &player) {
+}
+
+void DispelCard::activateForPlayer(Player &player) {
+    std::cout << "CONGRATULATIONS!!! " << player.name << " has exit from Wonderland!" << std::endl;
+
+    size_t amountOfPrizeCards = 0;
+    for (int i = 0; i < player.cardStorageForPlayer.size(); i++) {
+        if (player.cardStorageForPlayer[i]->getCardType() == "PrizeCard") {
+            amountOfPrizeCards++;
+        }
     }
+
+    std::cout << "AMOUNT OF PRIZECARDS: " << amountOfPrizeCards << std::endl;
+
+    std::stringstream ss;
+    ss << "game over";
+    throw std::runtime_error(ss.str());
+}
+
+void DispelCard::onDroped(Player &player) {
+}
+
+void RewindCard::onPickedUp(Player &player) {
+    player.current = player.start;
+    player.current->enter(&player);
+
+    player.cardStorageForPlayer.pop_back();
+}
+
+void RewindCard::onDroped(Player &player) {
+    Card::onDroped(player);
 }
 
 std::string StickyCard::getCardType() const {
-    return "StickyCard";
+    return "sticky";
 }
 
 std::string PrizeCard::getCardType() const {

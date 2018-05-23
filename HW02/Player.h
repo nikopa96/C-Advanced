@@ -12,36 +12,29 @@ class Player {
     friend class ZippyCard;
     friend class HypnoticCard;
     friend class DistractCard;
+    friend class DispelCard;
+    friend class RewindCard;
 public:
     Player(const std::string &playerName, std::shared_ptr<Tile> &&tile);
     friend std::ostream &operator<< (std::ostream &os, const Player &player);
-
-    void forward();
-    void backward();
+    virtual void forward();
+    virtual void backward();
     void reset();
     void operator()();
-
-    void pickUp();
+    virtual void pickUp();
     void drop(std::shared_ptr<Card> card);
-    void randomDrop();
     void sleep();
-
+    std::string getName();
     size_t getVitality();
     size_t getMaxVitality();
-    void increaseVitality();
-    void decreaseVitality();
-    void increaseMaxVitality();
-
     size_t getCardsByName(std::string cardName);
     std::shared_ptr<Card> getCardByName(std::string cardName);
     std::vector<std::shared_ptr<Card>> getCards();
-
-    void modifierCardsManager();
-
+    void runCardModifier();
 protected:
     constexpr static size_t defaultVitality = 3;
 
-    size_t point;
+    size_t point = 0;
     size_t vitality;
     size_t maxVitality;
     std::vector<std::shared_ptr<Card>> cardStorageForPlayer;
@@ -53,7 +46,9 @@ protected:
 class FlyingPlayer : public Player {
 public:
     FlyingPlayer(const std::string &playerName, std::shared_ptr<Tile> &&tile);
-    void pickUp();
+    void forward() override;
+    void backward() override;
+    void pickUp() override;
 };
 
 #endif //PRAX12_PLAYER_H

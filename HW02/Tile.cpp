@@ -14,7 +14,7 @@ std::ostream &operator<<(std::ostream &os, const Tile &t) {
 }
 
 void Tile::enter(Player *player) {
-    std::cout << *player << " entered tile " << name << std::endl;
+    std::cout << *player << " entered tile " << name << " / " << "Vitality: " << player->vitality << std::endl;
 }
 
 void Tile::leave(Player *player) {
@@ -22,7 +22,7 @@ void Tile::leave(Player *player) {
 }
 
 void Tile::addCard(std::shared_ptr<Card> card) {
-    std::cout << "Tile ADD CARD: " << card << std::endl;
+    std::cout << "Added card: " << card->getCardType() << " (" << card << ") to " << name << std::endl;
     cardStorage.push_back(card);
 }
 

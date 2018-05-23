@@ -9,20 +9,24 @@ Player::Player(const std::string &playerName, std::shared_ptr<Tile> &&tile) {
     vitality = defaultVitality;
     maxVitality = defaultVitality;
     current = start = std::move(tile);
+    std::cout << name << " initial vitality is: " << vitality << std::endl;
     current->enter(this);
 }
 
+std::string Player::getName() {
+    return name;
+}
 
 std::ostream &operator<<(std::ostream &os, const Player &player) {
     return os << player.name;
 }
 
 void Player::forward() {
-    modifierCardsManager();
+    runCardModifier();
 
     if ( ! current->next ) {
         std::stringstream ss;
-        ss << *current
+        ss << "EXCEPTION: " << *current
            << " is the last tile in the sequence, "
            << name << " cannot move forward.";
         throw std::runtime_error(ss.str());
@@ -30,23 +34,23 @@ void Player::forward() {
 
     if (vitality == 0) {
         std::stringstream ss;
-        ss << name << ": I am too tired to move";
+        ss << "EXCEPTION: " << name << ": I am too tired to move";
         throw std::runtime_error(ss.str());
     }
+
+    vitality--;
 
     current->leave(this);
     current = current->next;
     current->enter(this);
-
-    decreaseVitality();
 }
 
 void Player::backward() {
-    modifierCardsManager();
+    runCardModifier();
 
     if ( ! current->prev ) {
         std::stringstream ss;
-        ss << *current
+        ss << "EXCEPTION: " << *current
            << " is the first tile in the sequence, "
            << name << " cannot move backward";
         throw std::runtime_error(ss.str());
@@ -54,15 +58,15 @@ void Player::backward() {
 
     if (vitality == 0) {
         std::stringstream ss;
-        ss << name << ": I am too tired to move";
+        ss << "EXCEPTION: " << name << ": I am too tired to move";
         throw std::runtime_error(ss.str());
     }
+
+    vitality--;
 
     current->leave(this);
     current = current->prev;
     current->enter(this);
-
-    decreaseVitality();
 }
 
 void Player::sleep() {
@@ -77,6 +81,8 @@ void Player::reset() {
 }
 
 void Player::operator()() {
+    std::cout << "what" << std::endl;
+
     try {
         for (auto i=0; i<3; i++) {
             forward();
@@ -95,31 +101,22 @@ size_t Player::getVitality() {
     return vitality;
 }
 
-void Player::increaseVitality() {
-    vitality++;
-}
-
-void Player::decreaseVitality() {
-    vitality--;
-}
-
 size_t Player::getMaxVitality() {
     return maxVitality;
 }
 
-void Player::increaseMaxVitality() {
-    maxVitality++;
-}
-
 size_t Player::getCardsByName(std::string cardName) {
+    size_t rangeOfCards = 0;
     auto it = cardStorageForPlayer.begin();
 
     while (it != cardStorageForPlayer.end()) {
         if (it->get()->getCardType() == cardName) {
-            std::cout << it->get()->getCardType() << std::endl;
+            rangeOfCards++;
         }
         it++;
     }
+
+    return rangeOfCards;
 }
 
 std::shared_ptr<Card> Player::getCardByName(std::string cardName) {
@@ -140,35 +137,36 @@ std::vector<std::shared_ptr<Card>> Player::getCards() {
 void Player::pickUp() {
     if (current->cardStorage.empty()) {
         std::stringstream ss;
-        ss << *current
+        ss << "EXCEPTION: " << *current
            << ": this tile has no cards";
         throw std::runtime_error(ss.str());
     }
 
-    if (cardStorageForPlayer.size() > 5) {
+    if (cardStorageForPlayer.size() >= 5) {
         std::stringstream ss;
-        ss << *current
-           << ": Cards must be less than 5";
+        ss << "EXCEPTION: " << name
+           << ": can have max 5";
         throw std::runtime_error(ss.str());
     }
 
-    current->cardStorage[0]->setCardPickedState();
     cardStorageForPlayer.push_back(current->cardStorage[0]);
 
-    std::cout << "==== TEST ==== Added card to player's card storage: " << current->cardStorage[0] << std::endl;
+    std::cout << "Added card to " << name <<" card storage: " << current->cardStorage[0]->getCardType() <<
+              " (" << cardStorageForPlayer.back() << ") " << std::endl;
 
     current->cardStorage.erase(current->cardStorage.begin());
 
-    std::cout << "==== TEST ==== Tile's current vector size: " << current->cardStorage.size() << std::endl;
-    std::cout << "==== TEST ==== Player's current vector size: " << cardStorageForPlayer.size() << std::endl;
+    std::cout << current->name << " current vector size: " << current->cardStorage.size() << std::endl;
+    std::cout << name <<" current vector size: " << cardStorageForPlayer.size() << std::endl;
 
-    modifierCardsManager();
+    cardStorageForPlayer.back()->setCardPickedState();
+    cardStorageForPlayer.back()->doAction(*this);
 }
 
 void Player::drop(std::shared_ptr<Card> card) {
     if (cardStorageForPlayer.empty()) {
         std::stringstream ss;
-        ss << name << ": has no cards";
+        ss << "EXCEPTION: " << name << ": has no cards";
         throw std::runtime_error(ss.str());
     }
 
@@ -176,33 +174,35 @@ void Player::drop(std::shared_ptr<Card> card) {
     while (it != cardStorageForPlayer.end()) {
         if (*it == card) {
             card->setCardDropedState();
-            it = cardStorageForPlayer.erase(it);
+            card->doAction(*this);
+
+            if (card->getCardType() != "sticky") {
+                std::cout << name << " has droped " << it->get()->getCardType() << " (" << *it << ") " << std::endl;
+
+                current->cardStorage.push_back(*it);
+
+                it = cardStorageForPlayer.erase(it);
+                return;
+            } else {
+                std::stringstream ss;
+                ss << "EXCEPTION: " << name << ": this card" << " (" << card << ") " << "is " << card->getCardType() << ". You cannot drop the card!";
+                throw std::runtime_error(ss.str());
+            }
         } else {
             ++it;
         }
     }
+
+    std::stringstream ss;
+    ss << "EXCEPTION: " << name << ": this card " << card->getCardType() << " (" << card << ") " << "does not found";
+    throw std::runtime_error(ss.str());
 }
 
-void Player::modifierCardsManager() {
+void Player::runCardModifier() {
     if (!cardStorageForPlayer.empty()) {
-        const std::string vitalityCardType = "VitalityCard";
-
-        std::for_each(cardStorageForPlayer.begin(), cardStorageForPlayer.end(),
-                      [this, &vitalityCardType](std::shared_ptr<Card> &card) {
-                          if (card.get()->getCardType() == vitalityCardType) {
-                              card->onPickedUp(*this);
-                              card->onDroped(*this);
-                          }
-
-                      }
-        );
-
-    }
-}
-
-void Player::randomDrop() {
-    if (!cardStorageForPlayer.empty()) {
-        cardStorageForPlayer.erase(cardStorageForPlayer.begin());
+        for (int i = 0; i < cardStorageForPlayer.size(); i++) {
+            cardStorageForPlayer[i]->doAction(*this);
+        }
     }
 }
 
@@ -211,27 +211,60 @@ FlyingPlayer::FlyingPlayer(const std::string &playerName, std::shared_ptr<Tile> 
 void FlyingPlayer::pickUp() {
     if (current->cardStorage.empty()) {
         std::stringstream ss;
-        ss << *current
+        ss << "EXCEPTION: " << *current
            << ": this tile has no cards";
         throw std::runtime_error(ss.str());
     }
 
-    if (cardStorageForPlayer.size() > 3) {
+    if (cardStorageForPlayer.size() >= 3) {
         std::stringstream ss;
-        ss << *current
-           << ": Cards must be less than 3";
+        ss << "EXCEPTION: " << name
+           << ": can have max 3";
         throw std::runtime_error(ss.str());
     }
 
-    current->cardStorage[0]->setCardPickedState();
     cardStorageForPlayer.push_back(current->cardStorage[0]);
 
-    std::cout << "==== TEST ==== Added card to player's card storage: " << current->cardStorage[0] << std::endl;
+    std::cout << "Added card to " << name <<" card storage: " << current->cardStorage[0]->getCardType() <<
+              " (" << cardStorageForPlayer.back() << ") " << std::endl;
 
     current->cardStorage.erase(current->cardStorage.begin());
 
-    std::cout << "==== TEST ==== Tile's current vector size: " << current->cardStorage.size() << std::endl;
-    std::cout << "==== TEST ==== Player's current vector size: " << cardStorageForPlayer.size() << std::endl;
+    std::cout << current->name << " current vector size: " << current->cardStorage.size() << std::endl;
+    std::cout << name <<" current vector size: " << cardStorageForPlayer.size() << std::endl;
 
-    modifierCardsManager();
+    cardStorageForPlayer.back()->setCardPickedState();
+    cardStorageForPlayer.back()->doAction(*this);
+}
+
+void FlyingPlayer::forward() {
+    runCardModifier();
+
+    if ( ! current->next ) {
+        std::stringstream ss;
+        ss << "EXCEPTION: " << *current
+           << " is the last tile in the sequence, "
+           << name << " cannot move forward.";
+        throw std::runtime_error(ss.str());
+    }
+
+    current->leave(this);
+    current = current->next;
+    current->enter(this);
+}
+
+void FlyingPlayer::backward() {
+    runCardModifier();
+
+    if ( ! current->prev ) {
+        std::stringstream ss;
+        ss << "EXCEPTION: " << *current
+           << " is the first tile in the sequence, "
+           << name << " cannot move backward";
+        throw std::runtime_error(ss.str());
+    }
+
+    current->leave(this);
+    current = current->prev;
+    current->enter(this);
 }
